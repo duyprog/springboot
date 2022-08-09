@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         BRANCH_BUILD = "master"
-        CODE_DIR = "complete"
+        CODE_DIR = "springboots"
         GIT_URL = "https://github.com/duyprog/springboot.git"
     }
 
@@ -18,7 +18,7 @@ pipeline {
     stages {
 
         stage ('Pull source code to workspace') {
-            steps{
+            steps {
                 // clone source code
                 checkout([
                     $class: 'GitSCM',
@@ -29,8 +29,16 @@ pipeline {
                     userRemoteConfigs: [[url: "${GIT_URL}"]]
                 ])
             }
-            
+            // sh 'cd ${WORKSPACE}/'
         }
+
+        // stage('Build Spring Boot Service') {
+
+        //     steps {
+            
+
+        //     }
+        // }
     }
     post {
         always {

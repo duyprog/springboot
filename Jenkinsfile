@@ -9,6 +9,8 @@ pipeline {
         BRANCH_BUILD = "master"
         CODE_DIR = "springboots"
         GIT_URL = "https://github.com/duyprog/springboot.git"
+        DOCKER_REGISTRY="duypk2000/spring_boot"
+        REGISTRY_CREDENTIAL = '4f456563-ee78-428e-8dea-b1c270c009a5'
     }
 
     options {
@@ -17,7 +19,7 @@ pipeline {
 
     stages {
 
-        stage ('Pull source code to workspace') {
+        stage ('Build Spring Boot Jar file') {
             steps {
                 // clone source code
                 checkout([
@@ -33,17 +35,36 @@ pipeline {
             }
         }
 
-        // stage('Build Spring Boot Service') {
+        stage('Build Docker Spring Boot Service') {
 
-        //     steps {
-            
+            steps {
+                
+                script {
+                    dockerImage = docker.build registry + ":${IMAGE_TAG}"
+                }
+            }
+        }
 
-        //     }
-        // }
+        stage('Push Docker Image') {
+
+            steps{
+                script {
+                    docker.withRegistry('', REGISTRY_CREDENTIAL) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+
+        stage('Cleaning up') {
+            steps {
+                sh "docker rmi $REGISTRY:$IMAGE_TAG"
+            }
+        }
     }
-    // post {
-    //     always {
-    //         deleteDir()
-    //     }
-    // }
+    post {
+        always {
+            deleteDir()
+        }
+    }
 }

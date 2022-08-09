@@ -41,7 +41,7 @@ pipeline {
                 SERVICE_NAME = 'spring'
             }
             steps {
-                sh 'cd ${WORKSPACE}/{CODE_DIR}'
+                sh 'cd ${WORKSPACE}/${CODE_DIR}'
 
                 script {
                     dockerImage = docker.build DOCKER_REGISTRY + ":$IMAGE_TAG"

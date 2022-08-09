@@ -28,8 +28,9 @@ pipeline {
                     submoduleCfg: [],
                     userRemoteConfigs: [[url: "${GIT_URL}"]]
                 ])
+                sh 'cd ${WORKSPACE}/${CODE_DIR} && mvn clean install -Dmaven.test.skip=true'
+
             }
-            sh 'cd ${WORKSPACE}/${CODE_DIR} && mvn clean install -Dmaven.test.skip=true'
         }
 
         // stage('Build Spring Boot Service') {

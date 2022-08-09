@@ -29,7 +29,7 @@ pipeline {
                     userRemoteConfigs: [[url: "${GIT_URL}"]]
                 ])
             }
-            // sh 'cd ${WORKSPACE}/'
+            sh 'cd ${WORKSPACE}/${CODE_DIR} && mvn clean install -Dmaven.test.skip=true'
         }
 
         // stage('Build Spring Boot Service') {
@@ -40,9 +40,9 @@ pipeline {
         //     }
         // }
     }
-    post {
-        always {
-            deleteDir()
-        }
-    }
+    // post {
+    //     always {
+    //         deleteDir()
+    //     }
+    // }
 }

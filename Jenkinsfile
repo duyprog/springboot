@@ -6,13 +6,18 @@ pipeline {
     }
 
     environment {
-        BRANCH_BUILD = "master"
+        WORKSPACE = "/var/jenkins_home/workspace"
         CODE_DIR = "springboots"
         GIT_URL = "https://github.com/duyprog/springboot.git"
         DOCKER_REGISTRY="duypk2000/spring_boot"
-        REGISTRY_CREDENTIAL = '4f456563-ee78-428e-8dea-b1c270c009a5'
     }
+    
+    parameters {
+        string(name: 'BRANCH_BUILD', defaultValue: 'master', description: 'Branch name')
+        string(name: 'REGISTRY_CREDENTIAL', defaultValue: '', description: 'Registry credential include username and password to login Docker Hub')
+        string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Image tag of Docker Image')
 
+    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '20', artifactNumToKeepStr: '20'))
     }

@@ -62,7 +62,7 @@ pipeline {
 
         stage('Cleaning up') {
             steps {
-                sh "docker rmi $REGISTRY:$IMAGE_TAG"
+                sh "docker rmi $DOCKER_REGISTRY:$IMAGE_TAG"
             }
         }
     }

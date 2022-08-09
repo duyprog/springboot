@@ -53,7 +53,7 @@ pipeline {
 
             steps{
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', REGISTRY_CREDENTIAL) {
+                    docker.withRegistry('', REGISTRY_CREDENTIAL) {
                         dockerImage.push()
                     }
                 }

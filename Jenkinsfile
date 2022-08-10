@@ -49,7 +49,7 @@ pipeline {
                 sh 'cd ${WORKSPACE}/${CODE_DIR}'
 
                 script {
-                    dockerImage = docker.build DOCKER_REGISTRY + ":$IMAGE_TAG"
+                    dockerImage = docker.build("-f Dockerfile", "--no-cache","-t $DOCKER_REGISTRY + :$IMAGE_TAG")
                 }
             }
         }

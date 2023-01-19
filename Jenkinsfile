@@ -47,12 +47,9 @@ pipeline {
             steps {
                 withSonarQubeEnv('Sonar'){
                     sh '''$SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.projectKey=projectKey \
-                    -Dsonar.projectName=projectName \
-                    -Dsonar.sources=src/ \
-                    -Dsonar.java.binaries=target/classes/ \
-                    -Dsonar.exclusions=src/test/java/****/*.java \
-                    -Dsonar.java.libraries=/var/lib/jenkins/.m2/**/*.jar \
+                    -Dsonar.projectKey=springboot101 \
+                    -Dsonar.projectName=springboot \
+                    -Dsonar.sources=/var/jenkins/workspace/springboot
                     -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}'''
                 }
             }

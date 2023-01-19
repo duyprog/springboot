@@ -10,6 +10,7 @@ pipeline {
         WORKDIR = "springboot"
         GIT_URL = "https://github.com/duyprog/springboot.git"
         DOCKER_REGISTRY="duypk2000/spring_boot"
+        DOCKER_CREDENTIAL = credentials("docker")
     }
     
     parameters {
@@ -45,7 +46,7 @@ pipeline {
             }
             steps {
                 dir("${WORKDIR}"){
-                    sh "docker build . -t ${DOCKER_REGISTRY}:${IMAGE_TAG}"
+                    sh "docker build . -t $DOCKER_REGISTRY:$IMAGE_TAG}"
                 }
 
             }
@@ -54,11 +55,8 @@ pipeline {
         stage('Push Docker Image') {
 
             steps{
-                script {
-                    docker.withRegistry('', REGISTRY_CREDENTIAL) {
-                        dockerImage.push()
-                    }
-                }
+                sh "docker login --username ${DOCKER_CREDENTIAL_USR} -p ${DOCKER_CREDENTIAL_PSW}"
+                sh "docker push $DOCKER_REGISTRY:$IMAGE_TAG"
             }
         }
 

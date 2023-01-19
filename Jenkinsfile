@@ -47,7 +47,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('Sonar'){
                     sh '''$SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.projectKey=springboot101 \
+                    -Dsonar.projectKey=springboot \
                     -Dsonar.projectName=springboot \
                     -Dsonar.sources=/var/jenkins/workspace/springboot
                     -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}'''

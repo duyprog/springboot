@@ -44,10 +44,12 @@ pipeline {
                 SERVICE_NAME = 'spring'
             }
             steps {
-                dir("${WORKDIR}")
-                script {
-                    dockerImage = docker.build DOCKER_REGISTRY + ":$IMAGE_TAG"
+                dir("${WORKDIR}"){
+                    script {
+                        dockerImage = docker.build DOCKER_REGISTRY + ":$IMAGE_TAG"
+                    }
                 }
+
             }
         }
 

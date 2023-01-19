@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         WORKSPACE = "/var/lib/jenkins/workspace"
-        CODE_DIR = "springboots"
+        CODE_DIR = "springboot"
         GIT_URL = "https://github.com/duyprog/springboot.git"
         DOCKER_REGISTRY="duypk2000/spring_boot"
     }

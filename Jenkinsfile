@@ -33,7 +33,7 @@ pipeline {
                         branches: [[name: "${BRANCH_BUILD}"]],
                         userRemoteConfigs: [[url: "${GIT_URL}"]]
                     ])
-                    sh 'mvn clean install -Dmaven.test.skip=true''
+                    sh 'mvn clean install -Dmaven.test.skip=true'
                 }
             }
         }

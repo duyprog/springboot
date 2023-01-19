@@ -45,9 +45,7 @@ pipeline {
             }
             steps {
                 dir("${WORKDIR}"){
-                    script {
-                        dockerImage = docker.build DOCKER_REGISTRY + ":$IMAGE_TAG"
-                    }
+                    sh "docker build . -t ${DOCKER_REGISTRY}:${IMAGE_TAG}"
                 }
 
             }

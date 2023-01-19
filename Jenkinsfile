@@ -6,8 +6,8 @@ pipeline {
     }
 
     environment {
-        WORKSPACE = "/var/lib/jenkins/workspace"
-        CODE_DIR = "springboot"
+        // WORKSPACE = "/var/lib/jenkins/workspace"
+        WORKDIR = "springboot"
         GIT_URL = "https://github.com/duyprog/springboot.git"
         DOCKER_REGISTRY="duypk2000/spring_boot"
     }
@@ -27,16 +27,14 @@ pipeline {
         stage ('Build Spring Boot Jar file') {
             steps {
                 // clone source code
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: "${BRANCH_BUILD}"]],
-                    doGenerateSubmoduleConfigurations: false,
-                    extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: "${CODE_DIR}"]],
-                    submoduleCfg: [],
-                    userRemoteConfigs: [[url: "${GIT_URL}"]]
-                ])
-                sh 'cd ${WORKSPACE}/${CODE_DIR} && mvn clean install -Dmaven.test.skip=true'
-
+                dir("${WORKDIR}"){
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: "${BRANCH_BUILD}"]],
+                        userRemoteConfigs: [[url: "${GIT_URL}"]]
+                    ])
+                    sh 'mvn clean install -Dmaven.test.skip=true''
+                }
             }
         }
 

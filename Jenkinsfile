@@ -49,7 +49,8 @@ pipeline {
                     sh '''$SCANNER_HOME/bin/sonar-scanner \
                     -Dsonar.projectKey=springboot \
                     -Dsonar.projectName=springboot \
-                    -Dsonar.sources=src
+                    -Dsonar.sources=src \
+                    -Dsonar.java.binaries=target/classes/ \
                     -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}'''
                 }
             }

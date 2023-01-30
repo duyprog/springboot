@@ -10,7 +10,7 @@ pipeline {
         WORKDIR = "springboot"
         GIT_URL = "https://github.com/duyprog/springboot.git"
         DOCKER_REGISTRY="duypk2000/spring_boot"
-        DOCKER_CREDENTIAL = credentials("docker")
+        DOCKER_CREDENTIAL = credentials("DOCKER_CREDENTIAL")
     }
     
     parameters {

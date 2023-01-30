@@ -1,4 +1,4 @@
-library {
+libraries {
     lib('shared-library')
 }
 pipeline {

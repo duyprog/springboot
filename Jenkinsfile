@@ -1,3 +1,4 @@
+@Library('shared-library')
 pipeline {
     agent any
     
@@ -24,7 +25,11 @@ pipeline {
     }
 
     stages {
-
+        stage ('Test Shared Library') {
+            steps {
+                sayHello 'test'
+            }
+        }
         stage ('Build Spring Boot Jar file') {
             steps {
                 // clone source code

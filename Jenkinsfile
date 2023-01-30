@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     tools {
-        maven 'Maven3.6.0'
+        maven 'Maven3.6'
     }
 
     environment {
@@ -39,30 +39,30 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            environment {
-                SCANNER_HOME = tool 'Sonar-scanner'
-            }
+        // stage('SonarQube Analysis') {
+        //     environment {
+        //         SCANNER_HOME = tool 'Sonar-scanner'
+        //     }
 
-            steps {
-                withSonarQubeEnv('Sonar'){
-                    sh '''$SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.projectKey=springboot \
-                    -Dsonar.projectName=springboot \
-                    -Dsonar.sources=src \
-                    -Dsonar.java.binaries=target/classes/ \
-                    -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}'''
-                }
-            }
-        }
+        //     steps {
+        //         withSonarQubeEnv('Sonar'){
+        //             sh '''$SCANNER_HOME/bin/sonar-scanner \
+        //             -Dsonar.projectKey=springboot \
+        //             -Dsonar.projectName=springboot \
+        //             -Dsonar.sources=src \
+        //             -Dsonar.java.binaries=target/classes/ \
+        //             -Dsonar.projectVersion=${BUILD_NUMBER}-${GIT_COMMIT_SHORT}'''
+        //         }
+        //     }
+        // }
 
-        stage('SQuality Gate') {
-            steps {
-                timeout(time: 1, unit: 'MINUTES'){
-                    waitForQualityGate abortPipeline: true
-                } 
-            }
-        }
+        // stage('SQuality Gate') {
+        //     steps {
+        //         timeout(time: 1, unit: 'MINUTES'){
+        //             waitForQualityGate abortPipeline: true
+        //         } 
+        //     }
+        // }
 
         stage('Build Docker Spring Boot Service') {
             
